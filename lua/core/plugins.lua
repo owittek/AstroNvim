@@ -168,37 +168,21 @@ local astro_plugins = {
   },
 
   -- Package Manager
-  ["williamboman/mason.nvim"] = {
-    module = "mason",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-      "MasonUpdate", -- astronvim command
-      "MasonUpdateAll", -- astronvim command
-    },
-    config = function()
-      require "configs.mason"
-      vim.tbl_map(function(plugin) pcall(require, plugin) end, { "lspconfig", "null-ls" })
-    end,
-  },
+  ["williamboman/mason.nvim"] = { config = function() require "configs.mason" end },
 
   -- LSP manager
   ["williamboman/mason-lspconfig.nvim"] = {
-    after = "nvim-lspconfig",
+    after = "mason.nvim",
     config = function() require "configs.mason-lspconfig" end,
   },
 
   -- null-ls manager
-  ["jayp0521/mason-null-ls.nvim"] = { after = "null-ls.nvim", config = function() require "configs.mason-null-ls" end },
+  ["jayp0521/mason-null-ls.nvim"] = { after = "mason.nvim", config = function() require "configs.mason-null-ls" end },
 
   -- LSP symbols
   ["stevearc/aerial.nvim"] = {
     module = "aerial",
-    after = { "nvim-treesitter", "nvim-lspconfig" },
-    ft = { "man", "markdown" },
+    setup = function() table.insert(astronvim.file_plugins, "aerial.nvim") end,
     config = function() require "configs.aerial" end,
   },
 
@@ -299,14 +283,6 @@ if status_ok then
       local plugins = user_plugin_opts("plugins.init", astro_plugins)
       for key, plugin in pairs(plugins) do
         if type(key) == "string" and not plugin[1] then plugin[1] = key end
-        if key == "williamboman/mason.nvim" and plugin.cmd then
-          for mason_plugin, commands in pairs { -- lazy load mason plugin commands with Mason
-            ["jayp0521/mason-null-ls.nvim"] = { "NullLsInstall", "NullLsUninstall" },
-            ["williamboman/mason-lspconfig.nvim"] = { "LspInstall", "LspUninstall" },
-          } do
-            if plugins[mason_plugin] then vim.list_extend(plugin.cmd, commands) end
-          end
-        end
         use(plugin)
       end
     end,
