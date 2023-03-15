@@ -143,16 +143,16 @@ Run `:AstroUpdatePackages` (`<leader>pa`) to update both Neovim plugins and Maso
 - [Default Plugin Configuration](https://astronvim.com/configuration/plugin_defaults) more about the provided plugin defaults
 - [Advanced Configuration](https://astronvim.com/configuration/config_options) more about advanced configuration
 
-## 🚀 Contributing
-
-If you are planning on contributing please take a look at the [contribution guidelines](CONTRIBUTING.md) first.
-
 ### 📹 Videos
 
 There have been some great review videos released by members of the community! Here are a few:
 
 - [Why I'm quitting VIM by Carlos Mafla](https://www.youtube.com/watch?v=71GDopdc9rw) (Content By: [@gigo6000](https://github.com/gigo6000))
 - [Astro Vim - All in one Nvim config!! by John McBride](https://www.youtube.com/watch?v=JQLZ7NJRTEo) (Content By: [@jpmcb](https://github.com/jpmcb))
+
+## 🚀 Contributing
+
+If you are planning on contributing please take a look at the [contribution guidelines](CONTRIBUTING.md) first.
 
 ## ⭐ Credits
 
